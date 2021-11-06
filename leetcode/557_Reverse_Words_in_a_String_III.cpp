@@ -32,3 +32,18 @@ public:
         return result;
     }
 };
+
+/*
+    string reverseWords(string s) {
+        stringstream ss(s);
+        string str;
+        string res;
+        while(ss >> str){
+            reverse(str.begin(), str.end());
+            res += str + " ";
+        }
+        
+        res.erase(res.end() -1);
+        return res;
+    }
+*/
