@@ -5,7 +5,45 @@ https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-
 *******************************************************************************/
 
 class Solution {
+private:
+    int lowerbound(vector<int>& nums, int target){
+        //lowerbound return index of the first number greater or equal to the target
+        int low = 0;
+        int high = nums.size() -1;
+        while (low < high){
+            int mid = low + (high - low) /2;
+            if (nums[mid] < target){
+                low = mid + 1;
+            }else{
+                //nums[mid] >= target
+                high = mid;
+            }
+        }
+        return low;
+    }
+
 public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        if (nums.size() == 0){
+            return {-1, -1};
+        }
+        int low = lowerbound(nums, target);
+        int high = lowerbound(nums, target +1);
+        vector<int> res(2, -1);
+        
+        //check to make sure target is found;
+        if (nums[low] != target){
+            return res;
+        }
+        
+        res[0] = low;
+        res[1] = nums[high] > target ? high -1 : high;
+        return res;
+    }
+};
+
+/*
+    //method 1
     vector<int> searchRange(vector<int>& nums, int target) {
         if (nums.size() == 0){
             return {-1, -1};
@@ -43,4 +81,4 @@ public:
         res[1] = nums[low] == target -1 ? low : low -1;
         return res;
     }
-};
+*/

@@ -10,21 +10,18 @@ https://leetcode.com/problems/first-bad-version/
 class Solution {
 public:
     int firstBadVersion(int n) {
-        int low = 1;
-        int high = n;
+        int left = 1;
+        int right = n;
         
-        int mid = (high - low) / 2 + low;
-        
-        while(low <= high){
-            mid = (high - low) / 2 + low;
-            bool isBad = isBadVersion(mid);
-            if (isBad){
-                high = mid-1;
+        while (left < right){
+            int mid = left + (right - left)/ 2;
+            if (isBadVersion(mid) == false){
+                left = mid + 1;
             }else{
-                low = mid +1;
+                right = mid;
             }
         }
         
-        return low;
+        return left;
     }
 };

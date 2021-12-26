@@ -1,42 +1,29 @@
 /******************************************************************************
 https://leetcode.com/problems/search-insert-position/
 
-6.17.21
+12.26.21
 *******************************************************************************/
-
-#include <vector>
-
-using namespace std;
 
 class Solution {
 public:
+class Solution {
+public:
     int searchInsert(vector<int>& nums, int target) {
-        auto it = lower_bound(begin(nums), end(nums), target);
-        return distance(begin(nums), it);
-
-    }
-
-    int searchInsert1(vector<int>& nums, int target) {
+        //use lower_bound which returns index of the first number that is equal or greater than the target
         int left = 0;
         int right = nums.size() -1;
         
         while (left < right){
-            int middle = left + (right - left ) / 2;
-
-            if (nums[middle] == target){
-                return middle;
-            }else if (nums[middle] > target){
-                right = middle -1;
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target){
+                return mid;
+            }else if (nums[mid] < target){
+                left = mid + 1;
             }else{
-                left = middle + 1;
+                right = mid;
             }
-            
         }
-
-        return left;
-
-
+        //based on loop condition, invariant is left == right in the end
+        return nums[left] < target ? left + 1: left;
     }
-
-
 };
