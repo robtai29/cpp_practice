@@ -1,49 +1,65 @@
 /******************************************************************************
 https://leetcode.com/problems/reverse-words-in-a-string-iii/
 
-6.20.21
+12.26.21
 *******************************************************************************/
-
-
 class Solution {
 public:
     string reverseWords(string s) {
-        
-        string result(s);
-        
-        int right = 0;
-        int left = 0;
-        
-        for (int i = 0; i < result.length(); i++){
-            if (result[i] == ' ' || i == result.length() -1){
-                
-                i < result.length()-1 ? right = i : right = result.length();
-                
-                reverse(begin(result) + left, begin(result) + right);
-                
-                left = i + 1;
-                
-                
+        int i = 0;
+        for (int j = 0; j < s.length(); j++){
+            if (s[j] == ' ' || j == s.length() -1){
+                j == s.length() -1 ? reverse(s.begin() + i, s.end()) : reverse(s.begin() + i, s.begin() + j);
+                i = j + 1;
             }
             
-            
         }
-        
-        return result;
+            return s;
     }
 };
 
 /*
     string reverseWords(string s) {
-        stringstream ss(s);
-        string str;
-        string res;
-        while(ss >> str){
-            reverse(str.begin(), str.end());
-            res += str + " ";
+        
+        int right = s.find(' ');
+        int left = 0;
+        while (right != string::npos){
+            reverse(s.begin() + left, s.begin() + right);
+            left = right + 1;
+            right = s.find(' ', right + 1);
         }
         
-        res.erase(res.end() -1);
-        return res;
+        reverse(s.begin() + left, s.end());
+        return s;
     }
+*/
+
+/*
+class Solution {
+    void reverseWords(string& str, int start, int end){
+        int len = end - start + 1;
+        while (start < end){
+            char temp = str[start];
+            str[start] = str[end];
+            str[end] = temp;
+            start++;
+            end--;
+        }
+    }
+    
+public:
+    string reverseWords(string s) {
+        int start = 0;
+        int end = 0;
+        
+        for (int i = 0; i < s.length(); i++){
+            if (s[i] == ' ' || i == s.length() -1){
+                end = i == s.length() -1 ? i : i-1;
+                reverseWords(s, start, end);
+                start = i + 1;
+            }
+        }
+        return s;
+    }
+};
 */
