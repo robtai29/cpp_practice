@@ -7,6 +7,27 @@ https://leetcode.com/problems/valid-anagram/
 class Solution {
 public:
     bool isAnagram(string s, string t) {
+        if (s.length() != t.length()){
+            return false;
+        }
+        
+        int letters[26] = {};
+        for (int i = 0; i < s.length(); i++){
+            letters[s[i] - 'a']++;
+            letters[t[i] - 'a']--;
+        }
+        
+        for (int j = 0; j < 26; j++){
+            if (letters[j] != 0){
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+/*
+    bool isAnagram(string s, string t) {
         unordered_map<char, int> map;
         
         for (char ch : s){
@@ -25,4 +46,4 @@ public:
         
         return true;
     }
-};
+*/
