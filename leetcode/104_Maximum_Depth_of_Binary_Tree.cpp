@@ -56,13 +56,50 @@ public:
 };
 
 /*
+//dfs using recursion
     int maxDepth(TreeNode* root) {
        if (root == nullptr){
            return 0;
        }
         
-        int left = maxDepth(root -> left);
-        int right = maxDepth(root -> right);
-        return 1 + max(left, right);
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if (root == nullptr){
+            return 0;
+        }
+        
+        return 1 + max(maxDepth(root-> left), maxDepth(root-> right));
+    }
+};
     }
 */
+
+
+/*
+   int maxDepth(TreeNode* root) {
+        if (root == nullptr){
+            return 0;
+        }
+        
+        int res{0};
+        stack<pair<TreeNode*, int>> s;
+        s.push({root, 1});
+        
+        while (!s.empty()){
+            TreeNode* current = s.top().first;
+            int level = s.top().second;
+            res = max(res, level);
+            s.pop();
+            
+            if (current -> left){
+                s.push({current -> left, level + 1});
+            }
+            
+            if (current -> right){
+                s.push({current -> right, level + 1});
+            }
+        }
+        return res;
+    }
+    */

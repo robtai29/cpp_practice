@@ -1,7 +1,7 @@
 /******************************************************************************
 https://leetcode.com/problems/invert-binary-tree/
 
-10.7.2021
+10.7.2021, 1.20.22
 *******************************************************************************/
 
 /**
@@ -18,21 +18,29 @@ https://leetcode.com/problems/invert-binary-tree/
 class Solution {
 public:
 TreeNode* invertTree(TreeNode* root) {
-    stack<TreeNode*> s;
-    s.push(root);
-    while(!s.empty()){
-        TreeNode* current = s.top();
-        s.pop();
+    if (root == nullptr){
+        return nullptr;
+    }
+    
+    queue<TreeNode*> q;
+    q.push(root);
+    
+    while(!q.empty()){
+        TreeNode* current = q.front();
+        q.pop();
+        swap(current-> left, current-> right);
         
-        if(current != nullptr){
-            
-            swap(current-> left, current-> right);
-            s.push(current -> left);
-            s.push(current -> right);
+        if (current -> left){
+            q.push(current -> left);
+        }
+        
+        if (current -> right){
+            q.push(current -> right);
         }
     }
-    return root;
-}
+    
+        return root;
+    }
 };
 
 /*
@@ -48,4 +56,30 @@ public:
         
         return root;
     }
+*/
+
+/*
+class Solution {
+public:
+TreeNode* invertTree(TreeNode* root) {
+    if (root == nullptr){
+        return root;
+    }
+    stack<TreeNode*> s;
+    s.push(root);
+    while (!s.empty()){
+        TreeNode* current = s.top();
+        s.pop();
+        swap(current -> left, current-> right);
+            if (current -> left){
+            s.push(current -> left);
+            }
+            if (current -> right){
+            s.push(current -> right);
+            }
+        
+        }
+        return root;   
+    }
+};
 */

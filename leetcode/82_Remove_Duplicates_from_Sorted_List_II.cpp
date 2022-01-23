@@ -17,6 +17,7 @@ https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
+        //lesson learned: check to see head is null or if it only one head first--save a lot of trouble
         if (head == nullptr || head -> next == nullptr){
             return head;
         }
@@ -29,6 +30,7 @@ public:
         bool duplicate = false;
         
         while(current != nullptr){
+        //lesson learned: use if condition to preserve bool value from prev iteration
             if (current -> next != nullptr && current -> val == current -> next -> val){
                 duplicate = true;
             }else{
