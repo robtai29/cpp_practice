@@ -1,7 +1,7 @@
 /******************************************************************************
 https://leetcode.com/problems/permutation-in-string/
 
-11.4.21
+11.4.21, 1.24.22
 *******************************************************************************/
 
 class Solution {
@@ -34,6 +34,43 @@ public:
                 break;
             }
         }
-        return count == 0;
+        return false;
     }
 };
+
+/*
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int letters[26] = {};
+        
+        for (char ch : s1){
+            letters[ch - 'a']--;
+        }
+        
+        int count = 0;
+        for (int right = 0, left = 0; right < s2.length(); right++){
+            if (letters[s2[right]- 'a'] < 0){
+                count++;
+            }
+            letters[s2[right] - 'a']++;
+            
+            if (right >= s1.length()){
+                if (letters[s2[left] - 'a'] <= 0){
+                    count--;
+                }
+                
+                letters[s2[left] - 'a']--;
+                left++;
+            }
+                    
+            if (count == s1.length()){
+                return true;
+            }
+            
+            
+        }
+            return false;
+    }
+};
+*/

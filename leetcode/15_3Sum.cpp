@@ -11,7 +11,7 @@ sort the vector
 set up 3 pointers, i, j, k to see nums[i], nums[j], and nums[k] add up to 0.
 iterate i through a loop. j = i +1. k = nums.size() -1. two pointers
 add triple of values to res vector if sum is 0.
-after than, move j through duplicate values of nums[j] and move k through duplicates value of nums[k]
+after that, move j through duplicate values of nums[j] and move k through duplicates value of nums[k]
 after a loop, move i through duplicate values of nums[i] to prevent duplicate values added to the result
 
 */
