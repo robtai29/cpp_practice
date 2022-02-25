@@ -6,44 +6,41 @@ https://leetcode.com/problems/n-th-tribonacci-number/
 
 class Solution {
 public:
-    //bottom up iterative
     int tribonacci(int n) {
-        vector<int> v(n+4, 0);
-        v[0] = 0;
-        v[1] = 1;
-        v[2] = 1;
+        vector<int> dp(n+3);
         
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 1;
         for (int i = 3; i <= n; i++){
-            v[i] = v[i-3] + v[i-2] + v[i-1];
+            
+            dp[i] = dp[i-1]+ dp[i-2] + dp[i-3];
         }
         
-        return v[n];
-        
+        return dp[n];
     }
 };
 
 /*
 class Solution {
-public:
-    //top down + memoization
-    int tribonacci(int n, vector<int>& v){
+private:
+    int tribonacci(int n, vector<int>& memo){
         if (n < 0){
             return 0;
-        }
+        } 
         
-        if (v[n] == INT_MIN){
-            v[n] = tribonacci(n-1, v) +tribonacci(n-2, v)+ tribonacci(n-3, v);
-            return v[n];
+        if (memo[n] == -1){
+            memo[n] = tribonacci(n-1, memo) + tribonacci(n-2, memo) + tribonacci(n-3, memo);
         }
-        return v[n];
+        return memo[n];
     }
     
-    
+public:
     int tribonacci(int n) {
-        vector<int> memo(n+3, INT_MIN);
-        memo[0] =0;
-        memo[1] =1;
-        memo[1] =1;
+        vector<int> memo(n + 3, -1);
+        memo[0] = 0;
+        memo[1] = 1;
+        memo[2] = 1;
         
         return tribonacci(n, memo);
     }

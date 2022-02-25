@@ -53,8 +53,55 @@ class WordDictionary{
 
 
 /**
- * Your WordDictionary object will be instantiated and called as such:
- * WordDictionary* obj = new WordDictionary();
- * obj->addWord(word);
- * bool param_2 = obj->search(word);
+class WordDictionary {
+private:
+    struct TrieNode{
+        unordered_map<char, TrieNode*> mp;
+        bool isWord = false;
+    };
+        TrieNode* root = nullptr;
+    
+    bool search(const string& word, TrieNode* current, int index){
+        if (index == word.length()){
+            return current -> isWord;
+        }
+        
+        if (word[index] == '.'){
+                for (auto itr = current-> mp.begin(); itr != current -> mp.end(); ++itr){
+                    if (search(word, itr -> second, index + 1)){
+                        return true;
+                    }
+                
+            }
+        }else if (current -> mp.count(word[index]) == 1){
+            return search(word, current -> mp[word[index]], index + 1);
+        }
+            return false;
+    }
+
+    
+public:
+    WordDictionary() {
+        root = new TrieNode;
+    }
+    
+    void addWord(string word) {
+        TrieNode* current = root;
+        
+        for (const char& ch : word){
+            if (current -> mp.count(ch) == 0){
+                current -> mp[ch] = new TrieNode;
+            }
+                current = current -> mp[ch];
+        }
+                current -> isWord = true;
+    }
+    
+    bool search(string word) {
+        
+        return search(word, root, 0);
+        
+    }
+};
+
  */

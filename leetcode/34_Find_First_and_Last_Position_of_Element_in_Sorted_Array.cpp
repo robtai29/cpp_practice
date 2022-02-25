@@ -82,3 +82,27 @@ public:
         return res;
     }
 */
+
+/*
+//STl
+// lower bound return index of first number not less than target
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        auto itr = lower_bound(nums.begin(), nums.end(), target);
+        int index = itr - nums.begin();
+        if (itr == nums.end() || *itr != target){
+            return {-1, -1};
+        }
+        
+        vector<int> res;
+        res.push_back(index);
+        itr = lower_bound(nums.begin(), nums.end(), target + 1);
+        index = itr - nums.begin() -1;
+        res.push_back(index);
+        return res;
+        
+    }
+};
+*/
